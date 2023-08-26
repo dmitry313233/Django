@@ -27,7 +27,7 @@ def product(request):
     context = {
         'objects_list': product_list
     }
-    return render(request, 'catalog/products.html', context)
+    return render(request, 'catalog/product.html', context)
 
 
 
