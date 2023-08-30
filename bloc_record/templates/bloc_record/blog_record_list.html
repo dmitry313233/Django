@@ -1,0 +1,25 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+        {% for object in object_list %}
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h1 class="my-0 font-weight-normal">{{ object.title }}</h1>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li> Содержание: {{ object.body | slice:":150" }}</li>
+                    </ul>
+                    <a href="{% url 'bloc_record:blog_confirm_delete' object.pk %}" type="button" class="btn btn-lg btn-block btn-outline-danger">Удалить блог</a>
+                    <a href="{% url 'bloc_record:blog_record_create' %}" type="button" class="btn btn-lg btn-block btn-outline-success">Создать блог</a>
+                    <a href="{% url 'bloc_record:blog_update' object.pk %}" type="button" class="btn btn-lg btn-block btn-outline-primary">Редактировать блог</a>
+                    <a href="{% url 'bloc_record:blog_detail' object.pk %}" type="button" class="btn btn-lg btn-block btn-outline-primary">View</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
