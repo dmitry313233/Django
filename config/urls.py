@@ -22,5 +22,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('catalog.urls')),
-    path('', include('bloc_record.urls', namespace='bloc_record'))
+    path('bloc_record/', include('bloc_record.urls', namespace='bloc_record'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

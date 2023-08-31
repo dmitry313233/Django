@@ -1,6 +1,10 @@
 {% extends 'catalog/base.html' %}
 {% block content %}
 <div class="container">
+    <div class="col-3 mb-3">
+        <a href="{% url 'bloc_record:blog_record_create' %}" type="button"
+           class="btn btn-lg btn-block btn-outline-success">Создать блог</a>
+    </div>
     <div class="row text-center">
         {% for object in object_list %}
         <div class="col-3">
@@ -12,10 +16,12 @@
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                         <li> Содержание: {{ object.body | slice:":150" }}</li>
                     </ul>
-                    <a href="{% url 'bloc_record:blog_confirm_delete' object.pk %}" type="button" class="btn btn-lg btn-block btn-outline-danger">Удалить блог</a>
-                    <a href="{% url 'bloc_record:blog_record_create' %}" type="button" class="btn btn-lg btn-block btn-outline-success">Создать блог</a>
-                    <a href="{% url 'bloc_record:blog_update' object.pk %}" type="button" class="btn btn-lg btn-block btn-outline-primary">Редактировать блог</a>
-                    <a href="{% url 'bloc_record:blog_detail' object.pk %}" type="button" class="btn btn-lg btn-block btn-outline-primary">View</a>
+                    <a href="{% url 'bloc_record:blog_confirm_delete' object.pk %}" type="button"
+                       class="btn btn-lg btn-block btn-outline-danger">Удалить блог</a>
+                    <a href="{% url 'bloc_record:blog_update' object.pk %}" type="button"
+                       class="btn btn-lg btn-block btn-outline-primary">Редактировать блог</a>
+                    <a href="{% url 'bloc_record:blog_detail' object.pk %}" type="button"
+                       class="btn btn-lg btn-block btn-outline-primary">View</a>
                 </div>
             </div>
         </div>

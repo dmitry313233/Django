@@ -59,10 +59,8 @@ class BlogUpdateView(UpdateView):  # редактирование
 
         return super().form_valid(form)
 
-
-
     def get_success_url(self):
-        return reverse('bloc_record:blog_update', args=[self.kwargs.get('pk'),])
+        return reverse('bloc_record:blog_detail', args=[self.kwargs.get('pk'),])
 
 class BlogDeleteView(DeleteView):
     model = Blog
