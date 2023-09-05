@@ -1,12 +1,19 @@
 {% extends 'catalog/base.html' %}
 {% load my_tags %}
 {% block content %}
+<div class="col-12 mb-5">
+</div>
 <div class="container">
+    <a href="{% url 'bloc_record:blog_record_list' %}" type="button" class="btn btn-lg btn-block btn-outline-success mb-4">Перейти на страницу блога
+        </a>
+
+    <a href="{% url 'catalog:create' %}" type="button" class="btn btn-lg btn-block btn-outline-success mb-4">Добавить
+        продукт</a>
     <div class="row text-center">
-        {% for object in objects_list %}
+        {% for object in object_list %}
         <div class="col-3">
             <div class="card mb-4 box-shadow">
-                <img src= "{{ object.avatar | mymedia }}">
+                <img src="{{ object.avatar | mymedia }}">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">{{ object }}</h4>
                 </div>
@@ -16,6 +23,11 @@
                         <li>- {{ object.discription | slice:":100" }}</li>
                     </ul>
                     <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
+                    <a href="{% url 'catalog:update' object.pk %}" type="button"
+                       class="btn btn-lg btn-block btn-outline-success">Редактировать</a>
+                    <a href="{% url 'catalog:delete' object.pk %}" type="button"
+                       class="btn btn-lg btn-block btn-outline-danger">Удалить</a>
+
                 </div>
             </div>
         </div>
