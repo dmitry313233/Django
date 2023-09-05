@@ -4,8 +4,9 @@
 <div class="col-12 mb-5">
 </div>
 <div class="container">
-    <a href="{% url 'bloc_record:blog_record_list' %}" type="button" class="btn btn-lg btn-block btn-outline-success mb-4">Перейти на страницу блога
-        </a>
+    <a href="{% url 'bloc_record:blog_record_list' %}" type="button"
+       class="btn btn-lg btn-block btn-outline-success mb-4">Перейти на страницу блога
+    </a>
 
     <a href="{% url 'catalog:create' %}" type="button" class="btn btn-lg btn-block btn-outline-success mb-4">Добавить
         продукт</a>
@@ -21,10 +22,17 @@
                     <h1 class="card-title pricing-card-title">{{ object.purchase_price }} руб.</h1>
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                         <li>- {{ object.discription | slice:":100" }}</li>
+                        {% for version in object.version_set.all %}
+                        {% if version.sing_current_version %}
+                        {{ version.name_version }}
+                        {% else %} Не задано!
+                        {% endif %}
+                        {% endfor %}
                     </ul>
-                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
-                    <a href="{% url 'catalog:update' object.pk %}" type="button"
-                       class="btn btn-lg btn-block btn-outline-success">Редактировать</a>
+                    <a href="{% url 'catalog:product_detail' object.pk %}" type="button"
+                       class="btn btn-lg btn-block btn-outline-success">Просмотр товара</a> <a
+                        href="{% url 'catalog:update' object.pk %}" type="button"
+                        class="btn btn-lg btn-block btn-outline-success">Редактировать</a>
                     <a href="{% url 'catalog:delete' object.pk %}" type="button"
                        class="btn btn-lg btn-block btn-outline-danger">Удалить</a>
 

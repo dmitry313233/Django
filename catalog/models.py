@@ -31,3 +31,23 @@ class Category(models.Model):
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
         ordering = ('name',)
+
+
+class Version(models.Model):
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, verbose_name='название')
+    number_version = models.IntegerField(verbose_name='номер версии')
+    name_version = models.CharField(max_length=100, verbose_name='название версии')
+    sing_current_version = models.BooleanField(default=True, verbose_name='признак текущей версии')
+
+    def save(self, *args, **kwargs):
+        if self.sing_current_version:
+            Version.objects.filter(product=self.product, sing_current_version=True).update(sing_current_version=False)
+        super(Version, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return f'{self.product}'
+
+    class Meta:
+        verbose_name = 'Версия'
+        verbose_name_plural = 'Версии'
+        ordering = ('number_version',)
