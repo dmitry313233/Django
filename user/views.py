@@ -35,8 +35,8 @@ class RegisterView(CreateView):
             url = reverse('user:verification', args=[cod])
             total_url = self.request.build_absolute_uri(url)
             send_mail(
-                subject='Вы сменили пароль',
-                message=f'Ваш новый пароль: {total_url}',
+                subject='Успешная верификация',
+                message=f'Пройдите по ссылке для успешной верификации: {total_url}',
                 from_email=settings.EMAIL_HOST_USER,
                 recipient_list=[instance.email]
             )

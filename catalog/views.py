@@ -78,24 +78,15 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'catalog/product_confirm_delete.html'
 
 
+    # def get_context_data(self, **kwargs):   # Это низкоуровневое кеширование
+    #     context_data['products'] = get_categories_from_cache   #or get_cashed_subjects_for_product(self.object_pk)
+    #     return context_data
+
+
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     success_url = reverse_lazy('catalog:home')
     template_name = 'catalog/product_detail.html'  # Создать
-
-    def get_context_data(self, **kwargs):   # Это низкоуровневое кеширование
-        context_data = super().get_context_data(**kwargs)
-        if settings.CACHE_ENABLED:
-            key = f'product_list_{self.object.pk}'
-            product_list = cache.get(key)
-            if product_list is None:
-                product_list = self.object.product_set.all()
-                cache.set(key, product_list)
-        else:
-            product_list = self.object.product_set.all()
-
-        context_data['products'] = product_list   #or get_cashed_subjects_for_product(self.object_pk)
-        return context_data
 
 
 # def home(request):
